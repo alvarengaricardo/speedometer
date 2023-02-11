@@ -4,15 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
+    android:screenOrientation="landscape"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tv_speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="0"
+        android:textColor="@color/teal_200"
+        android:textSize="220sp" />
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tv_speed"
+        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:text="0 km/h"
-        android:textSize="48sp" />
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="49dp"
+        android:gravity="center"
+        android:text="km/h"
+        android:textColor="@color/teal_200"
+        android:textSize="18sp" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/sw_metric"
@@ -20,9 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:checked="true"
-        android:layout_marginBottom="100dp"
         android:gravity="center"
-        android:text="Metric Units" />
+        android:text="Metric Units"
+        android:textColor="@color/teal_200" />
 
 </RelativeLayout>

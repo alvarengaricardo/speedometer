@@ -23,7 +23,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
     SwitchCompat sw_metric;
-    TextView tv_speed;
+    TextView tv_speed, tv_label;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +32,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         sw_metric = findViewById(R.id.sw_metric);
         tv_speed = findViewById(R.id.tv_speed);
+        tv_label = findViewById(R.id.tv_label);
 
         // check for GPS permission
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-        != PackageManager.PERMISSION_GRANTED){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1000);
         } else {
             // start program if permission granted
@@ -54,32 +55,30 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @SuppressLint("MissingPermission")
     private void doStuff() {
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        if(locationManager != null) {
+        if (locationManager != null) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
         Toast.makeText(this, "Waiting for GPS...", Toast.LENGTH_SHORT).show();
     }
 
-    private void updateSpeed(CLocation location){
+    private void updateSpeed(CLocation location) {
         float nCurrentSpeed = 0;
 
-        if(location != null){
+        if (location != null) {
             location.setbUseMetricUnits(this.useMetricUnits());
             nCurrentSpeed = location.getSpeed();
         }
 
         Formatter fmt = new Formatter(new StringBuilder());
-        fmt.format(Locale.US,"%5.1f", nCurrentSpeed);
-        String strCurrentSpeed = fmt.toString();
-        strCurrentSpeed = strCurrentSpeed.replace(" ", "0");
+        fmt.format(Locale.US, "%5.0f", nCurrentSpeed);
+        //String strCurrentSpeed = fmt.toString();
+        //strCurrentSpeed = strCurrentSpeed.replace(" ", " ");
 
-        if(this.useMetricUnits()){
-            tv_speed.setText(strCurrentSpeed + " km/h");
-
+        if (this.useMetricUnits()) {
+            tv_label.setText("km/h");
         } else {
-            tv_speed.setText(strCurrentSpeed + " miles/h");
+            tv_label.setText("miles/h");
         }
-
     }
 
     @Override
@@ -96,11 +95,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        if(location != null){
+        if (location != null) {
             CLocation myLocation = new CLocation(location, this.useMetricUnits());
             this.updateSpeed(myLocation);
         }
-
     }
 
     private boolean useMetricUnits() {
