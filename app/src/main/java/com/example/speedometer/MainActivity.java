@@ -70,14 +70,18 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
 
         Formatter fmt = new Formatter(new StringBuilder());
-        fmt.format(Locale.US, "%5.0f", nCurrentSpeed);
-        //String strCurrentSpeed = fmt.toString();
-        //strCurrentSpeed = strCurrentSpeed.replace(" ", " ");
+        fmt.format(Locale.US,"%5.0f", nCurrentSpeed);
+        String strCurrentSpeed = fmt.toString();
+        //strCurrentSpeed = strCurrentSpeed.replace(" ", "0");
 
-        if (this.useMetricUnits()) {
-            tv_label.setText("km/h");
+        tv_speed.setText(strCurrentSpeed);
+        if(this.useMetricUnits()){
+          //  tv_speed.setText(strCurrentSpeed);
+            tv_label.setText("Km/h");
+
         } else {
-            tv_label.setText("miles/h");
+         //   tv_speed.setText(strCurrentSpeed);
+            tv_label.setText("Miles/h");
         }
     }
 
