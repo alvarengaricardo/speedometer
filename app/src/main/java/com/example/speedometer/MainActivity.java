@@ -22,8 +22,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
-    SwitchCompat sw_metric;
-    TextView tv_speed, tv_label;
+    private SwitchCompat sw_metric;
+    private TextView tv_speed, tv_label;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void updateSpeed(CLocation location) {
+
         float nCurrentSpeed = 0;
 
         if (location != null) {
@@ -70,17 +71,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
 
         Formatter fmt = new Formatter(new StringBuilder());
-        fmt.format(Locale.US,"%5.0f", nCurrentSpeed);
+        fmt.format(Locale.US, "%5.0f", nCurrentSpeed);
         String strCurrentSpeed = fmt.toString();
         //strCurrentSpeed = strCurrentSpeed.replace(" ", "0");
 
         tv_speed.setText(strCurrentSpeed);
-        if(this.useMetricUnits()){
-          //  tv_speed.setText(strCurrentSpeed);
+        if (this.useMetricUnits()) {
+            //  tv_speed.setText(strCurrentSpeed);
             tv_label.setText("Km/h");
 
         } else {
-         //   tv_speed.setText(strCurrentSpeed);
+            //   tv_speed.setText(strCurrentSpeed);
             tv_label.setText("Miles/h");
         }
     }
@@ -123,4 +124,5 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public void onProviderDisabled(@NonNull String provider) {
         LocationListener.super.onProviderDisabled(provider);
     }
+
 }
