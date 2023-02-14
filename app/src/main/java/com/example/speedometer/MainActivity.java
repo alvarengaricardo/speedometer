@@ -21,7 +21,6 @@ import java.util.Formatter;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
-
     private SwitchCompat sw_metric;
     private TextView tv_speed, tv_label;
 
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             doStuff();
         }
         this.updateSpeed(null);
-
         sw_metric.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -73,15 +71,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Formatter fmt = new Formatter(new StringBuilder());
         fmt.format(Locale.US, "%5.0f", nCurrentSpeed);
         String strCurrentSpeed = fmt.toString();
-        //strCurrentSpeed = strCurrentSpeed.replace(" ", "0");
 
         tv_speed.setText(strCurrentSpeed);
         if (this.useMetricUnits()) {
-            //  tv_speed.setText(strCurrentSpeed);
             tv_label.setText("Km/h");
-
         } else {
-            //   tv_speed.setText(strCurrentSpeed);
             tv_label.setText("Miles/h");
         }
     }
@@ -124,5 +118,4 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public void onProviderDisabled(@NonNull String provider) {
         LocationListener.super.onProviderDisabled(provider);
     }
-
 }
