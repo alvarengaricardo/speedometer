@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">speedometer</string>
     <string name="zero">0</string>
+    <string name="nines">999</string>
     <string name="km_h">km/h</string>
     <string name="metric_units">Metric Units</string>
 </resources>
