@@ -60,7 +60,7 @@ class CLocation extends Location {
         float nSpeed = super.getSpeed() * 3.6f;
 
         if (!this.getUseMetricUnits()) {
-            nSpeed = nSpeed * 2.23693629f;
+            nSpeed = nSpeed / 1.609344f;
         }
         return nSpeed;
     }
